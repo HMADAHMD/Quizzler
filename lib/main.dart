@@ -20,6 +20,7 @@ class MyAppState extends State<MyApp> {
     "Pakistan was the first Islamic country to become a nuclear power.",
     ""
   ];
+  List<bool> answers = [true, false, true, true];
   int count = 0;
   @override
   Widget build(BuildContext context) {
@@ -43,8 +44,13 @@ class MyAppState extends State<MyApp> {
           ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
+                bool correctanswer = answers[count];
                 setState(() {
-                  scores.add(Icon(Icons.check, color: Colors.green));
+                  if (correctanswer == true) {
+                    scores.add(Icon(Icons.check, color: Colors.green));
+                  } else {
+                    scores.add(Icon(Icons.close, color: Colors.red));
+                  }
                 });
                 count++;
                 print("True Pressed");
@@ -63,8 +69,13 @@ class MyAppState extends State<MyApp> {
               style: TextButton.styleFrom(
                   backgroundColor: Colors.red, foregroundColor: Colors.white),
               onPressed: () {
+                bool correctanser = answers[count];
                 setState(() {
-                  scores.add(Icon(Icons.close, color: Colors.red));
+                  if (correctanser == false) {
+                    scores.add(Icon(Icons.check, color: Colors.green));
+                  } else {
+                    scores.add(Icon(Icons.close, color: Colors.red));
+                  }
                 });
                 print("False Pressed");
                 count++;
