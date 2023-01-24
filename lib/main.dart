@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+//import 'question.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+// stateful widget to make changes visible on screen.
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -13,14 +15,19 @@ class MyApp extends StatefulWidget {
 
 class MyAppState extends State<MyApp> {
   List<Icon> scores = [];
-  List<String> questions = [
-    "Pakistan’s Khewra Salt Mine is one of the oldest in the world.",
-    "Pakistan’s national fruit is the watermelon",
-    "Pakistan has one of the largest irrigation systems in the world.",
-    "Pakistan was the first Islamic country to become a nuclear power.",
-    ""
+  List<Question> questionbank = [
+    Question(
+        q: "Pakistan’s Khewra Salt Mine is one of the oldest in the world.",
+        a: true),
+    Question(q: "Pakistan’s national fruit is the watermelon", a: false),
+    Question(
+        q: "Pakistan has one of the largest irrigation systems in the world.",
+        a: true),
+    Question(
+        q: "Pakistan was the first Islamic country to become a nuclear power.",
+        a: true),
   ];
-  List<bool> answers = [true, false, true, true];
+
   int count = 0;
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class MyAppState extends State<MyApp> {
         children: [
           Center(
             child: Text(
-              questions[count].toString(),
+              questionbank[count].questionText,
               style: TextStyle(fontSize: 25, color: Colors.white),
               textAlign: TextAlign.center,
             ),
@@ -44,7 +51,7 @@ class MyAppState extends State<MyApp> {
           ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
               onPressed: () {
-                bool correctanswer = answers[count];
+                bool correctanswer = questionbank[count].answerText;
                 setState(() {
                   if (correctanswer == true) {
                     scores.add(Icon(Icons.check, color: Colors.green));
@@ -69,7 +76,7 @@ class MyAppState extends State<MyApp> {
               style: TextButton.styleFrom(
                   backgroundColor: Colors.red, foregroundColor: Colors.white),
               onPressed: () {
-                bool correctanser = answers[count];
+                bool correctanser = questionbank[count].answerText;
                 setState(() {
                   if (correctanser == false) {
                     scores.add(Icon(Icons.check, color: Colors.green));
@@ -98,5 +105,16 @@ class MyAppState extends State<MyApp> {
         ],
       ),
     ));
+  }
+}
+
+// questionsClass
+class Question {
+  String questionText = '';
+  bool answerText = true;
+
+  Question({required String q, required bool a}) {
+    questionText = q;
+    answerText = a;
   }
 }
